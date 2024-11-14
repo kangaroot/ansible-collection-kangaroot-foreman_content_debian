@@ -1,0 +1,196 @@
+---
+# noqa: var-naming[no-role-prefix]
+
+foreman_content_credentials_debian11: []
+
+
+foreman_products_defaults: &foreman_products_defaults
+  content_type: deb
+  download_policy: "{{ foreman_products_defaults_download_policy_debian }}"
+  # mirror_on_sync: True
+  # mirroring_policy: "additive"
+  # mirroring_policy: "mirror_content_only"
+  mirroring_policy: "{{ foreman_products_defaults_mirroring_policy_debian }}"
+  verify_ssl_on_sync: "{{ foreman_products_defaults_verify_ssl_on_sync_debian | bool }}"
+  # http_proxy: Default Proxy
+  http_proxy_policy: "{{ foreman_products_defaults_http_proxy_policy_debian }}"
+  unprotected: "{{ foreman_products_defaults_unprotected_debian | bool }}"
+  deb_components: "{{ foreman_products_defaults_deb_components_debian }}"
+  deb_architectures: "{{ foreman_products_defaults_deb_architectures_debian }}"
+
+
+foreman_products_defaults_debian11: &foreman_products_defaults_debian11
+  <<: *foreman_products_defaults
+  download_policy: "{{ foreman_products_defaults_download_policy_debian11 }}"
+  mirroring_policy: "{{ foreman_products_defaults_mirroring_policy_debian11 }}"
+  verify_ssl_on_sync: "{{ foreman_products_defaults_verify_ssl_on_sync_debian11 | bool }}"
+  http_proxy_policy: "{{ foreman_products_defaults_http_proxy_policy_debian11 }}"
+  unprotected: "{{ foreman_products_defaults_unprotected_debian11 | bool }}"
+  deb_components: "{{ foreman_products_defaults_deb_components_debian11 }}"
+  deb_architectures: "{{ foreman_products_defaults_deb_architectures_debian11 }}"
+
+
+foreman_products_debian11:
+  - name: "{{ foreman_product_name_prefix | default('') }}Debian"
+    label: "{{ foreman_product_label_prefix | default('') }}Debian"
+    organization: "{{ foreman_organization_debian11 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Debian 11 (Bullseye)"
+        label: "{{ foreman_repo_label_prefix | default('') }}debian-11"
+        <<: *foreman_products_defaults_debian11
+        url: "{{ foreman_repo_baseurl_debian11 }}/"
+        deb_releases: bullseye
+        organization: "{{ foreman_organization_debian11 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Debian 11 (Bullseye) - Updates"
+        label: "{{ foreman_repo_label_prefix | default('') }}debian-11-updates"
+        <<: *foreman_products_defaults_debian11
+        url: "{{ foreman_repo_baseurl_debian11 }}/"
+        deb_releases: bullseye-updates
+        organization: "{{ foreman_organization_debian11 }}"
+      # - name: Debian 11 (Bullseye) - Proposed Updates
+      #   label: debian-11-proposed-updates
+      #   <<: *foreman_products_defaults_debian11
+      #   url: "{{ foreman_repo_baseurl_debian11 }}/"
+      #   deb_releases: bullseye-proposed-updates
+      #   organization: "{{ foreman_organization_debian11 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Debian 11 (Bullseye) - Backports"
+        label: "{{ foreman_repo_label_prefix | default('') }}debian-11-backports"
+        <<: *foreman_products_defaults_debian11
+        url: "{{ foreman_repo_baseurl_debian11 }}/"
+        deb_releases: bullseye-backports
+        organization: "{{ foreman_organization_debian11 }}"
+      # - name: Debian 11 (Bullseye) - Backports - Sloppy
+      #   label: debian-11-backports-sloppy
+      #   <<: *foreman_products_defaults_debian11
+      #   url: "{{ foreman_repo_baseurl_debian11 }}/"
+      #   deb_releases: bullseye-backports-sloppy
+      #   organization: "{{ foreman_organization_debian11 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Debian 11 (Bullseye) - Security updates"
+        label: "{{ foreman_repo_label_prefix | default('') }}debian-11-security"
+        <<: *foreman_products_defaults_debian11
+        url: "{{ foreman_repo_baseurl_debian11 }}-security/"
+        deb_releases: bullseye-security/updates
+        organization: "{{ foreman_organization_debian11 }}"
+
+
+foreman_content_views_debian11:
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}debian11"
+    organization: "{{ foreman_organization_debian11 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Debian 11 (Bullseye)"
+        product: "{{ foreman_product_name_prefix | default('') }}Debian"
+    allow_promote: "{{ foreman_cv_allow_promote_debian11 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}debian11_updates"
+    organization: "{{ foreman_organization_debian11 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Debian 11 (Bullseye) - Updates"
+        product: "{{ foreman_product_name_prefix | default('') }}Debian"
+    allow_promote: "{{ foreman_cv_allow_promote_debian11 }}"
+  # - name: "{{ foreman_cv_prefix | default('cv_') }}debian11_proposed_updates"
+  #   organization: "{{ foreman_organization_debian11 }}"
+  #   repositories:
+  #     - name: Debian 11 (Bullseye) - Proposed Updates
+  #       product: Debian
+  #   allow_promote: "{{ foreman_cv_allow_promote_debian11 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}debian11_backports"
+    organization: "{{ foreman_organization_debian11 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Debian 11 (Bullseye) - Backports"
+        product: "{{ foreman_product_name_prefix | default('') }}Debian"
+    allow_promote: "{{ foreman_cv_allow_promote_debian11 }}"
+  # - name: "{{ foreman_cv_prefix | default('cv_') }}debian11_backports_sloppy"
+  #   organization: "{{ foreman_organization_debian11 }}"
+  #   repositories:
+  #     - name: Debian 11 (Bullseye) - Backports - Sloppy
+  #       product: Debian
+  #   allow_promote: "{{ foreman_cv_allow_promote_debian11 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}debian11_security"
+    organization: "{{ foreman_organization_debian11 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Debian 11 (Bullseye) - Security updates"
+        product: "{{ foreman_product_name_prefix | default('') }}Debian"
+    allow_promote: "{{ foreman_cv_allow_promote_debian11 }}"
+
+foreman_composite_content_views_debian11:
+  - name: "{{ foreman_ccv_prefix | default('ccv_') }}{{ foreman_ccv_name_prefix | default('') }}debian11"
+    organization: "{{ foreman_organization_debian11 }}"
+    composite: True
+    allow_promote: "{{ foreman_ccv_allow_promote_debian11 }}"
+    auto_publish: "{{ foreman_ccv_auto_publish_debian11 }}"
+    components:
+      - content_view: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}debian11"
+        latest: true
+      - content_view: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}debian11_updates"
+        latest: true
+      # - content_view: "{{ foreman_cv_prefix | default('cv_') }}debian11_proposed_updates"
+      #   latest: true
+      - content_view: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}debian11_backports"
+        latest: true
+      # - content_view: "{{ foreman_cv_prefix | default('cv_') }}debian11_backports_sloppy"
+      #   latest: true
+      - content_view: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}debian11_security"
+        latest: true
+
+
+foreman_operatingsystems_defaults: &foreman_operatingsystems_defaults
+  os_family: "Debian"
+  password_hash: "SHA512"
+  architectures: "{{ foreman_operatingsystems_debian11_architectures }}"
+  # ptables:
+  #   - Preseed default
+  #   - Preseed default LVM
+  ptables: "{{ foreman_operatingsystems_debian11_ptables }}"
+
+
+foreman_operatingsystems_debian11:
+  - name: "Debian"
+    major: "11"
+    release_name: bullseye
+    description: "Debian 11 (Bullseye)"
+    default_templates: "{{ foreman_operatingsystems_debian11_default_templates | default( foreman_operatingsystems_debian_default_templates | default( foreman_operatingsystems_deb_default_templates | default([]) ) ) }}"
+    <<: *foreman_operatingsystems_defaults
+
+
+foreman_installation_media_defaults: &foreman_installation_media_defaults
+  os_family: Debian
+  # organizations:
+  #   - "{{ foreman_organization }}"
+  # locations:
+  #   - "{{ foreman_default_location }}"
+  organizations: "{{ foreman_installation_media_debian11_organizations }}"
+  locations: "{{ foreman_installation_media_debian11_locations }}"
+  operatingsystems: "{{ foreman_installation_media_debian11_operatingsystems }}"
+
+
+foreman_installation_media_debian11:
+  - name: "{{ foreman_media_name_prefix | default('') }}Debian 11 (Bullseye)"
+    path: "https://{{ foreman_server_hostname }}/pulp/content/{{ foreman_organization }}/Library/custom/Debian/debian-11/"
+    <<: *foreman_installation_media_defaults
+
+
+foreman_activation_keys_defaults: &foreman_activation_keys_defaults
+  # lifecycle_environment: "Library"
+  # subscriptions:
+  #   - name: "Debian"
+  auto_attach: False
+
+
+foreman_activation_keys_debian11:
+  - name: "{{ foreman_ak_prefix | default('ak_') }}{{ foreman_ak_name_prefix | default('') }}debian11"
+    organization: "{{ foreman_organization_debian11 }}"
+    content_view: "{{ foreman_ccv_prefix | default('ccv_') }}{{ foreman_ccv_name_prefix | default('') }}debian11"
+    <<: *foreman_activation_keys_defaults
+    content_overrides:
+      - label: "{{ foreman_organization }}_{{ foreman_product_label_prefix | default('') }}Debian_{{ foreman_repo_label_prefix | default('') }}debian-11"
+        override: default
+      - label: "{{ foreman_organization }}_{{ foreman_product_label_prefix | default('') }}Debian_{{ foreman_repo_label_prefix | default('') }}debian-11-updates"
+        override: default
+      # - label: "{{ foreman_organization }}_{{ foreman_product_label_prefix | default('') }}Debian_{{ foreman_repo_label_prefix | default('') }}debian-11-proposed-updates"
+      #   override: default
+      - label: "{{ foreman_organization }}_{{ foreman_product_label_prefix | default('') }}Debian_{{ foreman_repo_label_prefix | default('') }}debian-11-backports"
+        override: disabled
+      # - label: "{{ foreman_organization }}_{{ foreman_product_label_prefix | default('') }}Debian_{{ foreman_repo_label_prefix | default('') }}debian-11-backports-sloppy"
+      #   override: disabled
+      - label: "{{ foreman_organization }}_{{ foreman_product_label_prefix | default('') }}Debian_{{ foreman_repo_label_prefix | default('') }}debian-11-security"
+        override: disabled
+

@@ -1,0 +1,427 @@
+---
+# noqa: var-naming[no-role-prefix]
+# defaults file for foreman_content_debian
+
+#######################################
+### URLS
+#######################################
+
+foreman_repo_baseurl_debian: http://ftp.debian.org/debian
+
+foreman_repo_baseurl_debian9: "{{ foreman_repo_baseurl_debian }}"
+foreman_repo_baseurl_debian10: "{{ foreman_repo_baseurl_debian }}"
+foreman_repo_baseurl_debian11: "{{ foreman_repo_baseurl_debian }}"
+foreman_repo_baseurl_debian12: "{{ foreman_repo_baseurl_debian }}"
+
+
+#######################################
+### INSTALLATION MEDIA DEFAULTS
+#######################################
+
+foreman_installation_media_debian_organizations: "{{ foreman_installation_media_deb_organizations }}"
+foreman_installation_media_debian_locations: "{{ foreman_installation_media_deb_locations }}"
+foreman_installation_media_debian_operatingsystems: "{{ foreman_operatingsystems | default([]) | selectattr('os_family', 'defined') | selectattr('os_family', '==', 'Debian') | selectattr('name', '==', 'Debian') | map(attribute='description') | list }}"
+
+
+foreman_installation_media_debian9_organizations: "{{ foreman_installation_media_debian_organizations }}"
+foreman_installation_media_debian9_locations: "{{ foreman_installation_media_debian_locations }}"
+foreman_installation_media_debian9_operatingsystems:
+    - Debian 9 (Stretch)
+
+foreman_installation_media_debian10_organizations: "{{ foreman_installation_media_debian_organizations }}"
+foreman_installation_media_debian10_locations: "{{ foreman_installation_media_debian_locations }}"
+foreman_installation_media_debian10_operatingsystems:
+    - Debian 10 (Buster)
+
+foreman_installation_media_debian11_organizations: "{{ foreman_installation_media_debian_organizations }}"
+foreman_installation_media_debian11_locations: "{{ foreman_installation_media_debian_locations }}"
+foreman_installation_media_debian11_operatingsystems:
+    - Debian 11 (Bullseye)
+
+foreman_installation_media_debian12_organizations: "{{ foreman_installation_media_debian_organizations }}"
+foreman_installation_media_debian12_locations: "{{ foreman_installation_media_debian_locations }}"
+foreman_installation_media_debian12_operatingsystems:
+    - Debian 12 (Bookworm)
+
+
+#######################################
+### OS DEFAULTS
+#######################################
+
+foreman_operatingsystems_debian_architectures: "{{ foreman_operatingsystems_deb_architectures }}"
+foreman_operatingsystems_debian_ptables: "{{ foreman_operatingsystems_deb_ptables }}"
+
+foreman_operatingsystems_debian9_architectures: "{{ foreman_operatingsystems_ubuntu_architectures }}"
+foreman_operatingsystems_debian9_ptables: "{{ foreman_operatingsystems_ubuntu_ptables }}"
+
+foreman_operatingsystems_debian10_architectures: "{{ foreman_operatingsystems_ubuntu_architectures }}"
+foreman_operatingsystems_debian10_ptables: "{{ foreman_operatingsystems_ubuntu_ptables }}"
+
+foreman_operatingsystems_debian11_architectures: "{{ foreman_operatingsystems_ubuntu_architectures }}"
+foreman_operatingsystems_debian11_ptables: "{{ foreman_operatingsystems_ubuntu_ptables }}"
+
+foreman_operatingsystems_debian12_architectures: "{{ foreman_operatingsystems_ubuntu_architectures }}"
+foreman_operatingsystems_debian12_ptables: "{{ foreman_operatingsystems_ubuntu_ptables }}"
+
+
+#######################################
+### OS DEFAULT TEMPLATES
+#######################################
+
+### Debian operating system default templates
+# # foreman_operatingsystems_debian_template_cloud_init: "{{ foreman_operatingsystems_deb_template_cloud_init | default('CloudInit default') }}"
+# foreman_operatingsystems_debian_template_finish: "{{ foreman_operatingsystems_deb_template_finish | default('Preseed default finish') }}"
+# # foreman_operatingsystems_debian_template_host_init_config: "{{ foreman_operatingsystems_deb_template_host_init_config | default('Linux host_init_config default') }}"
+# # foreman_operatingsystems_debian_template_ipxe: "{{ foreman_operatingsystems_deb_template_ipxe | default('Preseed default iPXE') }}"
+# foreman_operatingsystems_debian_template_provision: "{{ foreman_operatingsystems_deb_template_provision | default('Preseed default') }}"
+# # foreman_operatingsystems_debian_template_pxegrub: "{{ foreman_operatingsystems_deb_template_pxegrub | default('Preseed default PXEGrub') }}"
+# foreman_operatingsystems_debian_template_pxegrub2: "{{ foreman_operatingsystems_deb_template_pxegrub2 | default('Preseed default PXEGrub2') }}"
+# foreman_operatingsystems_debian_template_pxelinux: "{{ foreman_operatingsystems_deb_template_pxelinux | default('Preseed default PXELinux') }}"
+# foreman_operatingsystems_debian_template_user_data: "{{ foreman_operatingsystems_deb_template_user_data | default('Preseed default user data') }}"
+
+# foreman_operatingsystems_debian_default_templates:
+#   # - template_kind: "cloud-init"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian_template_cloud_init | default( foreman_operatingsystems_deb_template_cloud_init | default('CloudInit default') ) }}"
+#   - template_kind: "finish"
+#     provisioning_template: "{{ foreman_operatingsystems_debian_template_finish | default( foreman_operatingsystems_deb_template_finish | default('Preseed default finish') ) }}"
+#   # - template_kind: "host_init_config"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian_template_host_init_config | default( foreman_operatingsystems_deb_template_host_init_config | default('Linux host_init_config default') ) }}"
+#   # - template_kind: "iPXE"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian_template_ipxe | default( foreman_operatingsystems_deb_template_ipxe | default('Preseed default iPXE') ) }}"
+#   - template_kind: "provision"
+#     provisioning_template: "{{ foreman_operatingsystems_debian_template_provision | default( foreman_operatingsystems_deb_template_provision | default('Preseed default') ) }}"
+#   # - template_kind: "PXEGrub"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian_template_pxegrub | default( foreman_operatingsystems_deb_template_pxegrub | default('Preseed default PXEGrub') ) }}"
+#   - template_kind: "PXEGrub2"
+#     provisioning_template: "{{ foreman_operatingsystems_debian_template_pxegrub2 | default( foreman_operatingsystems_deb_template_pxegrub2 | default('Preseed default PXEGrub2') ) }}"
+#   - template_kind: "PXELinux"
+#     provisioning_template: "{{ foreman_operatingsystems_debian_template_pxelinux | default( foreman_operatingsystems_deb_template_pxelinux | default('Preseed default PXELinux') ) }}"
+#   - template_kind: "user_data"
+#     provisioning_template: "{{ foreman_operatingsystems_debian_template_user_data | default( foreman_operatingsystems_deb_template_user_data | default('Preseed default user data') ) }}"
+
+### Debian 9 operating system default templates
+# # foreman_operatingsystems_debian9_template_cloud_init: "{{ foreman_operatingsystems_debian_template_cloud_init | default( foreman_operatingsystems_deb_template_cloud_init | default('CloudInit default') ) }}"
+# foreman_operatingsystems_debian9_template_finish: "{{ foreman_operatingsystems_debian_template_finish | default( foreman_operatingsystems_deb_template_finish | default('Preseed default finish') ) }}"
+# # foreman_operatingsystems_debian9_template_host_init_config: "{{ foreman_operatingsystems_debian_template_host_init_config | default( foreman_operatingsystems_deb_template_host_init_config | default('Linux host_init_config default') ) }}"
+# # foreman_operatingsystems_debian9_template_ipxe: "{{ foreman_operatingsystems_debian_template_ipxe | default( foreman_operatingsystems_deb_template_ipxe | default('Preseed default iPXE') ) }}"
+# foreman_operatingsystems_debian9_template_provision: "{{ foreman_operatingsystems_debian_template_provision | default( foreman_operatingsystems_deb_template_provision | default('Preseed default') ) }}"
+# # foreman_operatingsystems_debian9_template_pxegrub: "{{ foreman_operatingsystems_debian_template_pxegrub | default( foreman_operatingsystems_deb_template_pxegrub | default('Preseed default PXEGrub') ) }}"
+# foreman_operatingsystems_debian9_template_pxegrub2: "{{ foreman_operatingsystems_debian_template_pxegrub2 | default( foreman_operatingsystems_deb_template_pxegrub2 | default('Preseed default PXEGrub2') ) }}"
+# foreman_operatingsystems_debian9_template_pxelinux: "{{ foreman_operatingsystems_debian_template_pxelinux | default( foreman_operatingsystems_deb_template_pxelinux | default('Preseed default PXELinux') ) }}"
+# foreman_operatingsystems_debian9_template_user_data: "{{ foreman_operatingsystems_debian_template_user_data | default( foreman_operatingsystems_deb_template_user_data | default('Preseed default user data') ) }}"
+
+# foreman_operatingsystems_debian9_default_templates:
+#   # - template_kind: "cloud-init"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian9_template_cloud_init | default( foreman_operatingsystems_debian_template_cloud_init | default( foreman_operatingsystems_deb_template_cloud_init | default('CloudInit default') ) ) }}"
+#   - template_kind: "finish"
+#     provisioning_template: "{{ foreman_operatingsystems_debian9_template_finish | default( foreman_operatingsystems_debian_template_finish | default( foreman_operatingsystems_deb_template_finish | default('Preseed default finish') ) ) }}"
+#   # - template_kind: "host_init_config"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian9_template_host_init_config | default( foreman_operatingsystems_debian_template_host_init_config | default( foreman_operatingsystems_deb_template_host_init_config | default('Linux host_init_config default') ) ) }}"
+#   # - template_kind: "iPXE"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian9_template_ipxe | default( foreman_operatingsystems_debian_template_ipxe | default( foreman_operatingsystems_deb_template_ipxe | default('Preseed default iPXE') ) ) }}"
+#   - template_kind: "provision"
+#     provisioning_template: "{{ foreman_operatingsystems_debian9_template_provision | default( foreman_operatingsystems_debian_template_provision | default( foreman_operatingsystems_deb_template_provision | default('Preseed default') ) ) }}"
+#   # - template_kind: "PXEGrub"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian9_template_pxegrub | default( foreman_operatingsystems_debian_template_pxegrub | default( foreman_operatingsystems_deb_template_pxegrub | default('Preseed default PXEGrub') ) ) }}"
+#   - template_kind: "PXEGrub2"
+#     provisioning_template: "{{ foreman_operatingsystems_debian9_template_pxegrub2 | default( foreman_operatingsystems_debian_template_pxegrub2 | default( foreman_operatingsystems_deb_template_pxegrub2 | default('Preseed default PXEGrub2') ) ) }}"
+#   - template_kind: "PXELinux"
+#     provisioning_template: "{{ foreman_operatingsystems_debian9_template_pxelinux | default( foreman_operatingsystems_debian_template_pxelinux | default( foreman_operatingsystems_deb_template_pxelinux | default('Preseed default PXELinux') ) ) }}"
+#   - template_kind: "user_data"
+#     provisioning_template: "{{ foreman_operatingsystems_debian9_template_user_data | default( foreman_operatingsystems_debian_template_user_data | default( foreman_operatingsystems_deb_template_user_data | default('Preseed default user data') ) ) }}"
+
+### Debian 10 operating system default templates
+# # foreman_operatingsystems_debian10_template_cloud_init: "{{ foreman_operatingsystems_debian_template_cloud_init | default( foreman_operatingsystems_deb_template_cloud_init | default('CloudInit default') ) }}"
+# foreman_operatingsystems_debian10_template_finish: "{{ foreman_operatingsystems_debian_template_finish | default( foreman_operatingsystems_deb_template_finish | default('Preseed default finish') ) }}"
+# # foreman_operatingsystems_debian10_template_host_init_config: "{{ foreman_operatingsystems_debian_template_host_init_config | default( foreman_operatingsystems_deb_template_host_init_config | default('Linux host_init_config default') ) }}"
+# # foreman_operatingsystems_debian10_template_ipxe: "{{ foreman_operatingsystems_debian_template_ipxe | default( foreman_operatingsystems_deb_template_ipxe | default('Preseed default iPXE') ) }}"
+# foreman_operatingsystems_debian10_template_provision: "{{ foreman_operatingsystems_debian_template_provision | default( foreman_operatingsystems_deb_template_provision | default('Preseed default') ) }}"
+# # foreman_operatingsystems_debian10_template_pxegrub: "{{ foreman_operatingsystems_debian_template_pxegrub | default( foreman_operatingsystems_deb_template_pxegrub | default('Preseed default PXEGrub') ) }}"
+# foreman_operatingsystems_debian10_template_pxegrub2: "{{ foreman_operatingsystems_debian_template_pxegrub2 | default( foreman_operatingsystems_deb_template_pxegrub2 | default('Preseed default PXEGrub2') ) }}"
+# foreman_operatingsystems_debian10_template_pxelinux: "{{ foreman_operatingsystems_debian_template_pxelinux | default( foreman_operatingsystems_deb_template_pxelinux | default('Preseed default PXELinux') ) }}"
+# foreman_operatingsystems_debian10_template_user_data: "{{ foreman_operatingsystems_debian_template_user_data | default( foreman_operatingsystems_deb_template_user_data | default('Preseed default user data') ) }}"
+
+# foreman_operatingsystems_debian10_default_templates:
+#   # - template_kind: "cloud-init"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian10_template_cloud_init | default( foreman_operatingsystems_debian_template_cloud_init | default( foreman_operatingsystems_deb_template_cloud_init | default('CloudInit default') ) ) }}"
+#   - template_kind: "finish"
+#     provisioning_template: "{{ foreman_operatingsystems_debian10_template_finish | default( foreman_operatingsystems_debian_template_finish | default( foreman_operatingsystems_deb_template_finish | default('Preseed default finish') ) ) }}"
+#   # - template_kind: "host_init_config"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian10_template_host_init_config | default( foreman_operatingsystems_debian_template_host_init_config | default( foreman_operatingsystems_deb_template_host_init_config | default('Linux host_init_config default') ) ) }}"
+#   # - template_kind: "iPXE"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian10_template_ipxe | default( foreman_operatingsystems_debian_template_ipxe | default( foreman_operatingsystems_deb_template_ipxe | default('Preseed default iPXE') ) ) }}"
+#   - template_kind: "provision"
+#     provisioning_template: "{{ foreman_operatingsystems_debian10_template_provision | default( foreman_operatingsystems_debian_template_provision | default( foreman_operatingsystems_deb_template_provision | default('Preseed default') ) ) }}"
+#   # - template_kind: "PXEGrub"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian10_template_pxegrub | default( foreman_operatingsystems_debian_template_pxegrub | default( foreman_operatingsystems_deb_template_pxegrub | default('Preseed default PXEGrub') ) ) }}"
+#   - template_kind: "PXEGrub2"
+#     provisioning_template: "{{ foreman_operatingsystems_debian10_template_pxegrub2 | default( foreman_operatingsystems_debian_template_pxegrub2 | default( foreman_operatingsystems_deb_template_pxegrub2 | default('Preseed default PXEGrub2') ) ) }}"
+#   - template_kind: "PXELinux"
+#     provisioning_template: "{{ foreman_operatingsystems_debian10_template_pxelinux | default( foreman_operatingsystems_debian_template_pxelinux | default( foreman_operatingsystems_deb_template_pxelinux | default('Preseed default PXELinux') ) ) }}"
+#   - template_kind: "user_data"
+#     provisioning_template: "{{ foreman_operatingsystems_debian10_template_user_data | default( foreman_operatingsystems_debian_template_user_data | default( foreman_operatingsystems_deb_template_user_data | default('Preseed default user data') ) ) }}"
+
+### Debian 11 operating system default templates
+# # foreman_operatingsystems_debian11_template_cloud_init: "{{ foreman_operatingsystems_debian_template_cloud_init | default( foreman_operatingsystems_deb_template_cloud_init | default('CloudInit default') ) }}"
+# foreman_operatingsystems_debian11_template_finish: "{{ foreman_operatingsystems_debian_template_finish | default( foreman_operatingsystems_deb_template_finish | default('Preseed default finish') ) }}"
+# # foreman_operatingsystems_debian11_template_host_init_config: "{{ foreman_operatingsystems_debian_template_host_init_config | default( foreman_operatingsystems_deb_template_host_init_config | default('Linux host_init_config default') ) }}"
+# # foreman_operatingsystems_debian11_template_ipxe: "{{ foreman_operatingsystems_debian_template_ipxe | default( foreman_operatingsystems_deb_template_ipxe | default('Preseed default iPXE') ) }}"
+# foreman_operatingsystems_debian11_template_provision: "{{ foreman_operatingsystems_debian_template_provision | default( foreman_operatingsystems_deb_template_provision | default('Preseed default') ) }}"
+# # foreman_operatingsystems_debian11_template_pxegrub: "{{ foreman_operatingsystems_debian_template_pxegrub | default( foreman_operatingsystems_deb_template_pxegrub | default('Preseed default PXEGrub') ) }}"
+# foreman_operatingsystems_debian11_template_pxegrub2: "{{ foreman_operatingsystems_debian_template_pxegrub2 | default( foreman_operatingsystems_deb_template_pxegrub2 | default('Preseed default PXEGrub2') ) }}"
+# foreman_operatingsystems_debian11_template_pxelinux: "{{ foreman_operatingsystems_debian_template_pxelinux | default( foreman_operatingsystems_deb_template_pxelinux | default('Preseed default PXELinux') ) }}"
+# foreman_operatingsystems_debian11_template_user_data: "{{ foreman_operatingsystems_debian_template_user_data | default( foreman_operatingsystems_deb_template_user_data | default('Preseed default user data') ) }}"
+
+# foreman_operatingsystems_debian11_default_templates:
+#   # - template_kind: "cloud-init"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian11_template_cloud_init | default( foreman_operatingsystems_debian_template_cloud_init | default( foreman_operatingsystems_deb_template_cloud_init | default('CloudInit default') ) ) }}"
+#   - template_kind: "finish"
+#     provisioning_template: "{{ foreman_operatingsystems_debian11_template_finish | default( foreman_operatingsystems_debian_template_finish | default( foreman_operatingsystems_deb_template_finish | default('Preseed default finish') ) ) }}"
+#   # - template_kind: "host_init_config"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian11_template_host_init_config | default( foreman_operatingsystems_debian_template_host_init_config | default( foreman_operatingsystems_deb_template_host_init_config | default('Linux host_init_config default') ) ) }}"
+#   # - template_kind: "iPXE"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian11_template_ipxe | default( foreman_operatingsystems_debian_template_ipxe | default( foreman_operatingsystems_deb_template_ipxe | default('Preseed default iPXE') ) ) }}"
+#   - template_kind: "provision"
+#     provisioning_template: "{{ foreman_operatingsystems_debian11_template_provision | default( foreman_operatingsystems_debian_template_provision | default( foreman_operatingsystems_deb_template_provision | default('Preseed default') ) ) }}"
+#   # - template_kind: "PXEGrub"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian11_template_pxegrub | default( foreman_operatingsystems_debian_template_pxegrub | default( foreman_operatingsystems_deb_template_pxegrub | default('Preseed default PXEGrub') ) ) }}"
+#   - template_kind: "PXEGrub2"
+#     provisioning_template: "{{ foreman_operatingsystems_debian11_template_pxegrub2 | default( foreman_operatingsystems_debian_template_pxegrub2 | default( foreman_operatingsystems_deb_template_pxegrub2 | default('Preseed default PXEGrub2') ) ) }}"
+#   - template_kind: "PXELinux"
+#     provisioning_template: "{{ foreman_operatingsystems_debian11_template_pxelinux | default( foreman_operatingsystems_debian_template_pxelinux | default( foreman_operatingsystems_deb_template_pxelinux | default('Preseed default PXELinux') ) ) }}"
+#   - template_kind: "user_data"
+#     provisioning_template: "{{ foreman_operatingsystems_debian11_template_user_data | default( foreman_operatingsystems_debian_template_user_data | default( foreman_operatingsystems_deb_template_user_data | default('Preseed default user data') ) ) }}"
+
+### Debian 12 operating system default templates
+# # foreman_operatingsystems_debian12_template_cloud_init: "{{ foreman_operatingsystems_debian_template_cloud_init | default( foreman_operatingsystems_deb_template_cloud_init | default('CloudInit default') ) }}"
+# foreman_operatingsystems_debian12_template_finish: "{{ foreman_operatingsystems_debian_template_finish | default( foreman_operatingsystems_deb_template_finish | default('Preseed default finish') ) }}"
+# # foreman_operatingsystems_debian12_template_host_init_config: "{{ foreman_operatingsystems_debian_template_host_init_config | default( foreman_operatingsystems_deb_template_host_init_config | default('Linux host_init_config default') ) }}"
+# # foreman_operatingsystems_debian12_template_ipxe: "{{ foreman_operatingsystems_debian_template_ipxe | default( foreman_operatingsystems_deb_template_ipxe | default('Preseed default iPXE') ) }}"
+# foreman_operatingsystems_debian12_template_provision: "{{ foreman_operatingsystems_debian_template_provision | default( foreman_operatingsystems_deb_template_provision | default('Preseed default') ) }}"
+# # foreman_operatingsystems_debian12_template_pxegrub: "{{ foreman_operatingsystems_debian_template_pxegrub | default( foreman_operatingsystems_deb_template_pxegrub | default('Preseed default PXEGrub') ) }}"
+# foreman_operatingsystems_debian12_template_pxegrub2: "{{ foreman_operatingsystems_debian_template_pxegrub2 | default( foreman_operatingsystems_deb_template_pxegrub2 | default('Preseed default PXEGrub2') ) }}"
+# foreman_operatingsystems_debian12_template_pxelinux: "{{ foreman_operatingsystems_debian_template_pxelinux | default( foreman_operatingsystems_deb_template_pxelinux | default('Preseed default PXELinux') ) }}"
+# foreman_operatingsystems_debian12_template_user_data: "{{ foreman_operatingsystems_debian_template_user_data | default( foreman_operatingsystems_deb_template_user_data | default('Preseed default user data') ) }}"
+
+# foreman_operatingsystems_debian12_default_templates:
+#   # - template_kind: "cloud-init"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian12_template_cloud_init | default( foreman_operatingsystems_debian_template_cloud_init | default( foreman_operatingsystems_deb_template_cloud_init | default('CloudInit default') ) ) }}"
+#   - template_kind: "finish"
+#     provisioning_template: "{{ foreman_operatingsystems_debian12_template_finish | default( foreman_operatingsystems_debian_template_finish | default( foreman_operatingsystems_deb_template_finish | default('Preseed default finish') ) ) }}"
+#   # - template_kind: "host_init_config"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian12_template_host_init_config | default( foreman_operatingsystems_debian_template_host_init_config | default( foreman_operatingsystems_deb_template_host_init_config | default('Linux host_init_config default') ) ) }}"
+#   # - template_kind: "iPXE"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian12_template_ipxe | default( foreman_operatingsystems_debian_template_ipxe | default( foreman_operatingsystems_deb_template_ipxe | default('Preseed default iPXE') ) ) }}"
+#   - template_kind: "provision"
+#     provisioning_template: "{{ foreman_operatingsystems_debian12_template_provision | default( foreman_operatingsystems_debian_template_provision | default( foreman_operatingsystems_deb_template_provision | default('Preseed default') ) ) }}"
+#   # - template_kind: "PXEGrub"
+#   #   provisioning_template: "{{ foreman_operatingsystems_debian12_template_pxegrub | default( foreman_operatingsystems_debian_template_pxegrub | default( foreman_operatingsystems_deb_template_pxegrub | default('Preseed default PXEGrub') ) ) }}"
+#   - template_kind: "PXEGrub2"
+#     provisioning_template: "{{ foreman_operatingsystems_debian12_template_pxegrub2 | default( foreman_operatingsystems_debian_template_pxegrub2 | default( foreman_operatingsystems_deb_template_pxegrub2 | default('Preseed default PXEGrub2') ) ) }}"
+#   - template_kind: "PXELinux"
+#     provisioning_template: "{{ foreman_operatingsystems_debian12_template_pxelinux | default( foreman_operatingsystems_debian_template_pxelinux | default( foreman_operatingsystems_deb_template_pxelinux | default('Preseed default PXELinux') ) ) }}"
+#   - template_kind: "user_data"
+#     provisioning_template: "{{ foreman_operatingsystems_debian12_template_user_data | default( foreman_operatingsystems_debian_template_user_data | default( foreman_operatingsystems_deb_template_user_data | default('Preseed default user data') ) ) }}"
+
+
+#######################################
+### ENABLE VARS
+#######################################
+
+### DEBIAN
+
+foreman_enable_debian: false
+
+foreman_enable_debian9: false
+foreman_enable_debian10: false
+foreman_enable_debian11: "{{ foreman_enable_debian | bool }}"
+foreman_enable_debian12: "{{ foreman_enable_debian | bool }}"
+
+foreman_enable_debian_default_ccv: false
+foreman_enable_debian9_default_ccv: "{{ foreman_enable_debian_default_ccv | bool }}"
+foreman_enable_debian10_default_ccv: "{{ foreman_enable_debian_default_ccv | bool }}"
+foreman_enable_debian11_default_ccv: "{{ foreman_enable_debian_default_ccv | bool }}"
+foreman_enable_debian12_default_ccv: "{{ foreman_enable_debian_default_ccv | bool }}"
+
+foreman_enable_debian_default_ak: "{{ foreman_enable_debian_default_ccv | bool }}"
+foreman_enable_debian9_default_ak: "{{ foreman_enable_debian_default_ak | bool }}"
+foreman_enable_debian10_default_ak: "{{ foreman_enable_debian_default_ak | bool }}"
+foreman_enable_debian11_default_ak: "{{ foreman_enable_debian_default_ak | bool }}"
+foreman_enable_debian12_default_ak: "{{ foreman_enable_debian_default_ak | bool }}"
+
+
+#######################################
+### PRODUCT DEFAULTS
+#######################################
+
+### DEBIAN
+
+foreman_products_defaults_download_policy_debian: "{{ foreman_products_defaults_download_policy }}"
+foreman_products_defaults_mirroring_policy_debian: mirror_content_only
+foreman_products_defaults_verify_ssl_on_sync_debian: "{{ foreman_products_defaults_verify_ssl_on_sync | bool }}"
+foreman_products_defaults_http_proxy_policy_debian: "{{ foreman_products_defaults_http_proxy_policy }}"
+foreman_products_defaults_unprotected_debian: "{{ foreman_products_defaults_unprotected | bool }}"
+foreman_products_defaults_deb_components_debian: "{{ foreman_products_defaults_deb_components }}"
+foreman_products_defaults_deb_architectures_debian: "{{ foreman_products_defaults_deb_architectures }}"
+
+foreman_products_defaults_download_policy_debian9: "{{ foreman_products_defaults_download_policy_debian }}"
+foreman_products_defaults_mirroring_policy_debian9: "{{ foreman_products_defaults_mirroring_policy_debian }}"
+foreman_products_defaults_verify_ssl_on_sync_debian9: "{{ foreman_products_defaults_verify_ssl_on_sync_debian | bool }}"
+foreman_products_defaults_http_proxy_policy_debian9: "{{ foreman_products_defaults_http_proxy_policy_debian }}"
+foreman_products_defaults_unprotected_debian9: "{{ foreman_products_defaults_unprotected_debian | bool }}"
+foreman_products_defaults_deb_components_debian9: "{{ foreman_products_defaults_deb_components_debian }}"
+foreman_products_defaults_deb_architectures_debian9: "{{ foreman_products_defaults_deb_architectures_debian }}"
+
+foreman_products_defaults_download_policy_debian10: "{{ foreman_products_defaults_download_policy_debian }}"
+foreman_products_defaults_mirroring_policy_debian10: "{{ foreman_products_defaults_mirroring_policy_debian }}"
+foreman_products_defaults_verify_ssl_on_sync_debian10: "{{ foreman_products_defaults_verify_ssl_on_sync_debian | bool }}"
+foreman_products_defaults_http_proxy_policy_debian10: "{{ foreman_products_defaults_http_proxy_policy_debian }}"
+foreman_products_defaults_unprotected_debian10: "{{ foreman_products_defaults_unprotected_debian | bool }}"
+foreman_products_defaults_deb_components_debian10: "{{ foreman_products_defaults_deb_components_debian }}"
+foreman_products_defaults_deb_architectures_debian10: "{{ foreman_products_defaults_deb_architectures_debian }}"
+
+foreman_products_defaults_download_policy_debian11: "{{ foreman_products_defaults_download_policy_debian }}"
+foreman_products_defaults_mirroring_policy_debian11: "{{ foreman_products_defaults_mirroring_policy_debian }}"
+foreman_products_defaults_verify_ssl_on_sync_debian11: "{{ foreman_products_defaults_verify_ssl_on_sync_debian | bool }}"
+foreman_products_defaults_http_proxy_policy_debian11: "{{ foreman_products_defaults_http_proxy_policy_debian }}"
+foreman_products_defaults_unprotected_debian11: "{{ foreman_products_defaults_unprotected_debian | bool }}"
+foreman_products_defaults_deb_components_debian11: "{{ foreman_products_defaults_deb_components_debian }}"
+foreman_products_defaults_deb_architectures_debian11: "{{ foreman_products_defaults_deb_architectures_debian }}"
+
+foreman_products_defaults_download_policy_debian12: "{{ foreman_products_defaults_download_policy_debian }}"
+foreman_products_defaults_mirroring_policy_debian12: "{{ foreman_products_defaults_mirroring_policy_debian }}"
+foreman_products_defaults_verify_ssl_on_sync_debian12: "{{ foreman_products_defaults_verify_ssl_on_sync_debian | bool }}"
+foreman_products_defaults_http_proxy_policy_debian12: "{{ foreman_products_defaults_http_proxy_policy_debian }}"
+foreman_products_defaults_unprotected_debian12: "{{ foreman_products_defaults_unprotected_debian | bool }}"
+foreman_products_defaults_deb_components_debian12: "{{ foreman_products_defaults_deb_components_debian }}"
+foreman_products_defaults_deb_architectures_debian12: "{{ foreman_products_defaults_deb_architectures_debian }}"
+
+
+#######################################
+### ORGANIZATION VARS
+#######################################
+
+### DEBIAN
+
+foreman_organization_debian: "{{ foreman_organization }}"
+
+foreman_organization_debian9: "{{ foreman_organization_debian }}"
+foreman_organization_debian10: "{{ foreman_organization_debian }}"
+foreman_organization_debian11: "{{ foreman_organization_debian }}"
+foreman_organization_debian12: "{{ foreman_organization_debian }}"
+
+
+#######################################
+### CONTENT VIEW DEFAULTS
+#######################################
+
+### DEBIAN
+
+foreman_cv_allow_promote_debian: "{{ foreman_cv_allow_promote | bool }}"
+foreman_ccv_allow_promote_debian: "{{ foreman_ccv_allow_promote | bool }}"
+foreman_ccv_auto_publish_debian: "{{ foreman_ccv_auto_publish | bool }}"
+
+foreman_cv_allow_promote_debian9: "{{ foreman_cv_allow_promote_debian | bool }}"
+foreman_ccv_allow_promote_debian9: "{{ foreman_ccv_allow_promote_debian | bool }}"
+foreman_ccv_auto_publish_debian9: "{{ foreman_ccv_auto_publish_debian | bool }}"
+
+foreman_cv_allow_promote_debian10: "{{ foreman_cv_allow_promote_debian | bool }}"
+foreman_ccv_allow_promote_debian10: "{{ foreman_ccv_allow_promote_debian | bool }}"
+foreman_ccv_auto_publish_debian10: "{{ foreman_ccv_auto_publish_debian | bool }}"
+
+foreman_cv_allow_promote_debian11: "{{ foreman_cv_allow_promote_debian | bool }}"
+foreman_ccv_allow_promote_debian11: "{{ foreman_ccv_allow_promote_debian | bool }}"
+foreman_ccv_auto_publish_debian11: "{{ foreman_ccv_auto_publish_debian | bool }}"
+
+foreman_cv_allow_promote_debian12: "{{ foreman_cv_allow_promote_debian | bool }}"
+foreman_ccv_allow_promote_debian12: "{{ foreman_ccv_allow_promote_debian | bool }}"
+foreman_ccv_auto_publish_debian12: "{{ foreman_ccv_auto_publish_debian | bool }}"
+
+
+#######################################
+### CONTENT
+#######################################
+
+foreman_content_credentials_debian_main: []
+foreman_content_credentials_debian: "{{ ( foreman_content_credentials_debian_main | default([]) if foreman_enable_debian | bool else [] ) |
+  union( foreman_content_credentials_debian9 | default([]) if foreman_enable_debian9 | bool else [] ) |
+  union( foreman_content_credentials_debian10 | default([]) if foreman_enable_debian10 | bool else [] ) |
+  union( foreman_content_credentials_debian11 | default([]) if foreman_enable_debian11 | bool else [] ) |
+  union( foreman_content_credentials_debian12 | default([]) if foreman_enable_debian11 | bool else [] )
+  }}"
+
+foreman_products_debian_main: []
+foreman_products_debian: "{{ ( foreman_products_debian_main | default([]) if foreman_enable_debian | bool else [] ) |
+  union( foreman_products_debian9 | default([]) if foreman_enable_debian9 | bool else [] ) |
+  union( foreman_products_debian10 | default([]) if foreman_enable_debian10 | bool else [] ) |
+  union( foreman_products_debian11 | default([]) if foreman_enable_debian11 | bool else [] ) |
+  union( foreman_products_debian12 | default([]) if foreman_enable_debian11 | bool else [] )
+  }}"
+
+foreman_content_views_debian_main: []
+foreman_composite_content_views_debian_main: []
+foreman_content_views_debian: "{{ ( foreman_content_views_debian_main | default([]) if foreman_enable_debian | bool else [] ) |
+  union( foreman_content_views_debian9 | default([]) if foreman_enable_debian9 | bool else [] ) |
+  union( foreman_content_views_debian10 | default([]) if foreman_enable_debian10 | bool else [] ) |
+  union( foreman_content_views_debian11 | default([]) if foreman_enable_debian11 | bool else [] ) |
+  union( foreman_content_views_debian12 | default([]) if foreman_enable_debian11 | bool else [] ) |
+  union( foreman_composite_content_views_debian_main | default([]) if foreman_enable_debian | bool and foreman_enable_debian_default_ccv | bool else [] ) |
+  union( foreman_composite_content_views_debian9 | default([]) if foreman_enable_debian9 | bool and foreman_enable_debian9_default_ccv | bool else [] ) |
+  union( foreman_composite_content_views_debian10 | default([]) if foreman_enable_debian10 | bool and foreman_enable_debian10_default_ccv | bool else [] ) |
+  union( foreman_composite_content_views_debian11 | default([]) if foreman_enable_debian11 | bool and foreman_enable_debian11_default_ccv | bool else [] ) |
+  union( foreman_composite_content_views_debian12 | default([]) if foreman_enable_debian12 | bool and foreman_enable_debian12_default_ccv | bool else [] )
+  }}"
+
+foreman_operatingsystems_debian_main: []
+foreman_operatingsystems_debian: "{{ ( foreman_operatingsystems_debian_main | default([]) if foreman_enable_debian | bool else [] ) |
+  union( foreman_operatingsystems_debian9 | default([]) if foreman_enable_debian9 | bool else [] ) |
+  union( foreman_operatingsystems_debian10 | default([]) if foreman_enable_debian10 | bool else [] ) |
+  union( foreman_operatingsystems_debian11 | default([]) if foreman_enable_debian11 | bool else [] ) |
+  union( foreman_operatingsystems_debian12 | default([]) if foreman_enable_debian11 | bool else [] )
+  }}"
+
+foreman_installation_media_debian_defaults: &foreman_installation_media_debian_defaults
+  os_family: Debian
+  # organizations:
+  #   - "{{ foreman_organization }}"
+  # locations:
+  #   - "{{ foreman_default_location }}"
+  organizations: "{{ foreman_all_organizations_namelist }}"
+  locations: "{{ foreman_all_locations_namelist }}"
+
+foreman_installation_media_debian_main:
+  - name: "{{ foreman_media_name_prefix | default('') }}Debian mirror"
+    path: "{{ foreman_repo_baseurl_debian }}"
+    <<: *foreman_installation_media_debian_defaults
+    operatingsystems: "{{ [] |
+      union( ['Debian 9 (Stretch)'] if foreman_enable_debian9 | bool else [] ) |
+      union( ['Debian 10 (Buster)'] if foreman_enable_debian10 | bool else [] ) |
+      union( ['Debian 11 (Bullseye)'] if foreman_enable_debian11 | bool else [] ) |
+      union( ['Debian 12 (Bookworm)'] if foreman_enable_debian12 | bool else [] )
+      }}"
+
+foreman_installation_media_debian: "{{ ( foreman_installation_media_debian_main | default([]) if foreman_enable_debian | bool else [] ) |
+  union( foreman_installation_media_debian9 | default([]) if foreman_enable_debian9 | bool else [] ) |
+  union( foreman_installation_media_debian10 | default([]) if foreman_enable_debian10 | bool else [] ) |
+  union( foreman_installation_media_debian11 | default([]) if foreman_enable_debian11 | bool else [] ) |
+  union( foreman_installation_media_debian12 | default([]) if foreman_enable_debian11 | bool else [] )
+  }}"
+
+foreman_activation_keys_debian_main: []
+foreman_activation_keys_debian: "{{ ( foreman_activation_keys_debian_main | default([]) if foreman_enable_debian | bool and foreman_enable_debian_default_ak | bool else [] ) |
+  union( foreman_activation_keys_debian9 | default([]) if foreman_enable_debian9 | bool and foreman_enable_debian9_default_ak | bool else [] ) |
+  union( foreman_activation_keys_debian10 | default([]) if foreman_enable_debian10 | bool and foreman_enable_debian10_default_ak | bool else [] ) |
+  union( foreman_activation_keys_debian11 | default([]) if foreman_enable_debian11 | bool and foreman_enable_debian11_default_ak | bool else [] ) |
+  union( foreman_activation_keys_debian12 | default([]) if foreman_enable_debian11 | bool and foreman_enable_debian12_default_ak | bool else [] )
+  }}"
+
+foreman_sync_plan_products_debian_main:
+  - "{{ foreman_product_name_prefix | default('') }}Debian"
+
+foreman_sync_plan_products_debian: "{{ ( foreman_sync_plan_products_debian_main | default([]) if foreman_enable_debian | bool else [] ) |
+  union( foreman_sync_plan_products_debian9 | default([]) if foreman_enable_debian9 | bool else [] ) |
+  union( foreman_sync_plan_products_debian10 | default([]) if foreman_enable_debian10 | bool else [] ) |
+  union( foreman_sync_plan_products_debian11 | default([]) if foreman_enable_debian11 | bool else [] ) |
+  union( foreman_sync_plan_products_debian12 | default([]) if foreman_enable_debian11 | bool else [] )
+  }}"
+
