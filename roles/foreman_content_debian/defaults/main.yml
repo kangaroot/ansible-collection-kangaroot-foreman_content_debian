@@ -261,7 +261,7 @@ foreman_products_defaults_mirroring_policy_debian: mirror_content_only
 foreman_products_defaults_verify_ssl_on_sync_debian: "{{ foreman_products_defaults_verify_ssl_on_sync | bool }}"
 foreman_products_defaults_http_proxy_policy_debian: "{{ foreman_products_defaults_http_proxy_policy }}"
 foreman_products_defaults_unprotected_debian: "{{ foreman_products_defaults_unprotected | bool }}"
-foreman_products_defaults_deb_components_debian: "{{ foreman_products_defaults_deb_components }}"
+foreman_products_defaults_deb_components_debian: main contrib non-free
 foreman_products_defaults_deb_architectures_debian: "{{ foreman_products_defaults_deb_architectures }}"
 
 foreman_products_defaults_download_policy_debian9: "{{ foreman_products_defaults_download_policy_debian }}"
